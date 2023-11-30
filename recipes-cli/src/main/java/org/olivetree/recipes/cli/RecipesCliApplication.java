@@ -38,7 +38,6 @@ public class RecipesCliApplication {
 
             String line = "";
             while (line.isEmpty()) {
-                System.out.print("> ");
                 line = scanner.nextLine().trim();
             }
 
@@ -137,14 +136,13 @@ public class RecipesCliApplication {
     }
 
     private static Recipe getRecipeFromUser(Scanner scanner) {
-        System.out.print("Recipe Name ");
+        System.out.print("Recipe Name: ");
         String recipeName = scanner.nextLine().trim();
 
-        System.out.print("Recipe Description ");
+        System.out.print("Recipe Description: ");
         String recipeDescription = scanner.nextLine().trim();
 
-        System.out.print("Recipe Duration ");
-        long recipeDuration = scanner.nextLong();
+        long recipeDuration = getLong(scanner, "Recipe Duration: ");
 
         Recipe recipe = new Recipe();
         recipe.setName(recipeName);
@@ -155,17 +153,29 @@ public class RecipesCliApplication {
     }
 
     private static long getRecipeIdFromUser(Scanner scanner) {
-        System.out.print("Recipe ID ");
-        return scanner.nextLong();
+        return getLong(scanner, "Recipe ID: ");
     }
 
     private static RecipeSearch getRecipeSearchFromUser(Scanner scanner) {
-        System.out.print("Duration From ");
-        long durationFrom = scanner.nextLong();
-
-        System.out.print("Duration To ");
-        long durationTo = scanner.nextLong();
+        long durationFrom = getLong(scanner, "Duration From: ");
+        long durationTo = getLong(scanner, "Duration To: ");
 
         return new RecipeSearch(durationFrom, durationTo);
+    }
+
+    private static long getLong(Scanner scanner, String label) {
+        long l = -1;
+
+        while(l == -1) {
+            System.out.print(label);
+            String trim = scanner.nextLine().trim();
+
+            try {
+                l = Long.parseLong(trim);
+            } catch(NumberFormatException nfe) {
+            }
+        }
+
+        return l;
     }
 }
