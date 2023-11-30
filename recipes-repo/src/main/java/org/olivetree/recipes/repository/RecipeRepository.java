@@ -8,6 +8,11 @@ import java.util.Optional;
 
 public interface RecipeRepository {
 
+    // Using this to avoid exposing the RecipeJdbcRepositoryImpl from the module itself.
+    static RecipeRepository openRecipeRepository(String databaseFile) {
+        return new RecipeJdbcRepositoryImpl(databaseFile);
+    }
+
     Recipe createRecipe(Recipe recipe);
 
     List<Recipe> getAllRecipes();
