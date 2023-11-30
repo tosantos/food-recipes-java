@@ -13,6 +13,9 @@ target/
 *.iml
 *.ipr
 
+# h2 database files
+*.db.mv.db
+
 ### Eclipse ###
 .apt_generated
 .classpath
