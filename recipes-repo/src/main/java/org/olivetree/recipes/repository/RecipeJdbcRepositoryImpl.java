@@ -1,5 +1,6 @@
 package org.olivetree.recipes.repository;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.h2.jdbcx.JdbcDataSource;
 import org.olivetree.recipes.domain.Recipe;
 import org.olivetree.recipes.domain.RecipeSearch;
@@ -34,9 +35,14 @@ public class RecipeJdbcRepositoryImpl implements RecipeRepository {
     private final DataSource dataSource;
 
     public RecipeJdbcRepositoryImpl() {
-        // TODO: Configure MySQL Datasource
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setServerName("localhost");
+        dataSource.setPortNumber(3306);
+        dataSource.setDatabaseName("recipes_db");
+        dataSource.setUser("root");
+        dataSource.setPassword("pass");
 
-        this.dataSource = null;
+        this.dataSource = dataSource;
     }
 
     @Override

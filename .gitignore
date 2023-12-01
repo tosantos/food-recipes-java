@@ -16,6 +16,9 @@ target/
 # h2 database files
 *.db.mv.db
 
+# MySQL data folder
+.data/
+
 ### Eclipse ###
 .apt_generated
 .classpath
