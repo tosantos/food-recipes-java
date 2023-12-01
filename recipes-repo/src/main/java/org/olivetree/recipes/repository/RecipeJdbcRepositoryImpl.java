@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class RecipeJdbcRepositoryImpl implements RecipeRepository {
-    private static final String H2_DATABASE_URL = "jdbc:h2:file:%s;AUTO_SERVER=TRUE;INIT=RUNSCRIPT FROM './db-init.sql'";
-
     private static final String INSERT_RECIPE = """
         INSERT INTO Recipes(name, description, duration)
         VALUES (?, ?, ?)
@@ -35,11 +33,10 @@ public class RecipeJdbcRepositoryImpl implements RecipeRepository {
 
     private final DataSource dataSource;
 
-    public RecipeJdbcRepositoryImpl(String databaseFile) {
-        JdbcDataSource jdbcDataSource = new JdbcDataSource();
-        jdbcDataSource.setURL(H2_DATABASE_URL.formatted(databaseFile));
+    public RecipeJdbcRepositoryImpl() {
+        // TODO: Configure MySQL Datasource
 
-        this.dataSource = jdbcDataSource;
+        this.dataSource = null;
     }
 
     @Override

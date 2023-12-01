@@ -9,10 +9,7 @@ import org.olivetree.recipes.repository.RecipeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Properties;
 import java.util.Scanner;
 
 import static org.olivetree.recipes.cli.RecipesCliCommands.*;
@@ -23,7 +20,7 @@ public class RecipesCliApplication {
 
     private static RecipeStorageService recipeStorageService;
     public static void main(String[] args) {
-        RecipeRepository recipeRepo = RecipeRepository.openRecipeRepository(loadDatabaseFilename());
+        RecipeRepository recipeRepo = RecipeRepository.openRecipeRepository();
 
         recipeStorageService = new RecipeStorageService(recipeRepo);
 
@@ -121,17 +118,6 @@ public class RecipesCliApplication {
             LOG.info("Recipe successfully created");
         } catch (RecipeConstraintsException e) {
             LOG.error("Recipe provided is not valid");
-        }
-    }
-
-    private static String loadDatabaseFilename() {
-        try(InputStream propertiesStream = RecipesCliApplication.class.getResourceAsStream("/server.properties")) {
-            Properties properties = new Properties();
-            properties.load(propertiesStream);
-
-            return properties.getProperty("recipes.database");
-        } catch (IOException e) {
-            throw new IllegalStateException("Could not load database file");
         }
     }
 
