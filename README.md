@@ -12,7 +12,8 @@ It contains 4 modules:
 
 #### recipes-repo
 The repository that stores all recipe related information. 
-This module depends on **h2** relational database system to support CRUD operations
+This module depends on **MySQL** relational database system to support CRUD operations. 
+The **MySQL** database is run as a docker container
 
 #### recipes-server
 The REST API server that exposes endpoints and performs CRUD operations on the repository
@@ -27,6 +28,12 @@ A simple REST API client that performs CRUD operations based on REST calls made 
 This module depends on **recipes-server** to perform REST calls
 
 ## Running
+Ensure you have the **MySQL** database container up and running:
+```
+# Run docker compose up command in detach mode
+docker-compose up -d
+```
+
 I decided not to use a uber-jar approach for this project. 
 
 If you want to run the different UI and REST server you'll need to run them manually or better yet use an IDE
