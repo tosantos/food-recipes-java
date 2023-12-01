@@ -1,0 +1,16 @@
+version: '3.1'
+
+networks:
+  default:
+
+services:
+  db:
+    image: mysql:8.2.0
+    container_name: 'recipes-mysql-db-container'
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: recipes_db
